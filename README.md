@@ -17,7 +17,7 @@ apt-get update
 apt-get -y install git-core puppet-agent
 ```
 
-Move the default /etc/puppetlabs into /etc/puppetlabs-bak in case you fuck up:
+Move the default /etc/puppetlabs into /etc/puppetlabs-bak:
 
 ```
 mv /etc/puppetlabs/ /etc/puppetlabs-bak
