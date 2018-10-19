@@ -1,6 +1,6 @@
 # Puppet
 
-This repository contains Puppet files to be placed in `/etc/puppet`.
+This repository contains Puppet files to be placed in `/etc/puppetlabs`.
 
 ## Initial Deployment
 
