@@ -1,4 +1,4 @@
-# Puppet
+# beachyapp/puppet-agent
 
 This repository contains Puppet files to be placed in `/etc/puppetlabs`.
 
@@ -57,6 +57,8 @@ You can test your changes using this repository's Dockerfile:
 docker build -t puppet .
 docker run -ti -v $(pwd):/etc/puppetlabs -v $HOME/.aws/:/root/.aws puppet /bin/bash
 ```
+
+This assumes you have an AWS credentials file in `~/.aws`.
 
 Changes you make to the code will automatically sync with /etc/puppetlabs inside
 of the container. You can run `puppet apply` using the same command at the bottom
