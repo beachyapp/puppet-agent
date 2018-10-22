@@ -2,11 +2,11 @@ Facter.add('env') do
   setcode do
     begin
       require 'aws-sdk-ssm'
-      az = system('ec2metadata --availability-zone')
+      region = system('which ec2metadata') && `ec2metadata --availability-zone`[/us-(.*)-\d/]
       environment = ENV['APP_ENV']
 
-      if az && environment
-        ssm = Aws::SSM::Client.new(region: az.chop)
+      if region && environment
+        ssm = Aws::SSM::Client.new(region: region)
         result = ssm.get_parameters_by_path path: "/#{environment}/env"
 
         vars = result.parameters.map do |param|
