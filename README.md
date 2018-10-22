@@ -1,6 +1,13 @@
 # Puppet
 
-This repository contains Puppet files to be placed in `/etc/puppet`.
+This repository contains Puppet files to be placed in `/etc/puppetlabs`.
+
+After the initial deployment, this repository will be pulled and self-deployed every
+30 minutes.
+
+Parameters stored as `/{environment}/env/{NAME}` in AWS Parameter Store will be pulled
+and placed in `/etc/environment`. Be sure to place the parameters in the same region as
+the server doing the fetching.
 
 ## Initial Deployment
 
@@ -26,7 +33,13 @@ mv /etc/puppetlabs/ /etc/puppetlabs-bak
 Clone this repository into /etc/puppetlabs:
 
 ```
-git clone https://github.com/beachyapp/puppet.git /etc/puppetlabs
+git clone https://github.com/beachyapp/puppet-agent.git /etc/puppetlabs
+```
+
+At this point, switch to root:
+
+```
+sudo su
 ```
 
 Puppet doesn't come with it's own stdlib, so we need to install it:
@@ -43,11 +56,6 @@ Finally, apply the configuration to the server:
 
 The configuration will setup a cronjob to git pull every 30 minutes. After each
 git pull, the new configuration will run automatically.
-
-## Deploying Changes
-
-Push changes to this repository. All servers that followed the steps under
-"Initial Deployment" will receive the changes within 30 minutes.
 
 ## Testing
 
