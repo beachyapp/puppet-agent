@@ -3,7 +3,7 @@
 This repository contains Puppet files to be placed in `/etc/puppetlabs`.
 
 After the initial deployment, this repository will be pulled and self-deployed every
-30 minutes.
+30 minutes (:30 and :00).
 
 Parameters stored as `/{environment}/env/{NAME}` in AWS Parameter Store will be pulled
 and placed in `/etc/environment`. Be sure to place the parameters in the same region as
