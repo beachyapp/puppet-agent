@@ -3,22 +3,28 @@ class cron_puppet {
     ensure => installed,
   }
 
-  # After git pulling, run puppet apply
+  # Ensure old post-merge hook is not there
   file { 'post-hook':
-    ensure  => file,
+    ensure  => absent,
     path    => '/etc/puppetlabs/.git/hooks/post-merge',
-    source  => 'puppet:///modules/cron_puppet/post-merge',
-    mode    => "0755",
-    owner   => root,
-    group   => root,
   }
 
-  # Git pull puppet every 30mins
+  # Puppet apply every 30mins
   cron { 'puppet-apply':
+    ensure  => present,
+    command => "/opt/puppetlabs/bin/puppet apply /etc/puppetlabs/code/manifests/site.pp",
+    user    => root,
+    minute  => '*/20',
+    require => [ Package['cron'] ],
+  }
+
+
+  # Git pull puppet every 30mins
+  cron { 'git-pull':
     ensure  => present,
     command => "cd /etc/puppetlabs; /usr/bin/git pull",
     user    => root,
     minute  => '*/30',
-    require => [ File['post-hook'], Package['cron'] ],
+    require => [ Package['cron'] ],
   }
 }
