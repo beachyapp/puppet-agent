@@ -9,7 +9,7 @@ class cron_puppet {
     path    => '/etc/puppetlabs/.git/hooks/post-merge',
   }
 
-  # Puppet apply every 30mins
+  # Puppet apply every 20mins
   cron { 'puppet-apply':
     ensure  => present,
     command => "/opt/puppetlabs/bin/puppet apply /etc/puppetlabs/code/manifests/site.pp",
